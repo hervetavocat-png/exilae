@@ -2,7 +2,8 @@ import apiService from './apiService';
 
 class UploadService {
   constructor() {
-    this.baseURL = 'http://localhost:5001/api/uploads';
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+    this.baseURL = `${apiUrl}/uploads`;
   }
 
   /**

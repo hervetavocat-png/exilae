@@ -23,8 +23,7 @@ export default function CitySection() {
             </svg>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif', fontWeight: 'bold'}}>
-            Rencontrez nos experts d'Urgence OQTF partout en France !
-            <br />
+            Nous sommes compétents sur toute la France pour faire annuler votre OQTF
           </h2>
           <p className="text-md max-w-3xl mx-auto leading-relaxed" style={{color: '#12255D'}}>
             Sur Paris, Nice ou partout en France, nos avocats experts vous accompagnent où que vous soyez
@@ -41,12 +40,6 @@ export default function CitySection() {
                 alt="Cabinet Paris" 
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              {/* Blue overlay at bottom with city name */}
-              <div className="absolute bottom-0 left-0 right-0 py-4 text-center" style={{backgroundColor: 'rgba(30, 58, 138, 0.5)'}}>
-                <h3 className="text-white text-2xl font-bold" style={{fontFamily: 'Poppins, sans-serif'}}>
-                  Paris
-                </h3>
-              </div>
             </div>
             {/* Red button below the card */}
             <Link
@@ -65,12 +58,6 @@ export default function CitySection() {
                 alt="Cabinet Nice" 
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              {/* Blue overlay at bottom with city name */}
-              <div className="absolute bottom-0 left-0 right-0 py-4 text-center" style={{backgroundColor: 'rgba(30, 58, 138, 0.5)'}}>
-              <h3 className="text-white text-2xl font-bold" style={{fontFamily: 'Poppins, sans-serif'}}>
-                  Nice
-                </h3>
-              </div>
             </div>
             {/* Red button below the card */}
             <Link

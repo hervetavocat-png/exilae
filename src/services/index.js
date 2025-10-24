@@ -42,7 +42,7 @@ export const testAllConnections = async () => {
 
 // Configuration globale
 export const API_CONFIG = {
-  BASE_URL: 'http://localhost:5001/api',
+  BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:5001/api',
   TIMEOUT: 10000, // 10 secondes
   RETRY_ATTEMPTS: 3
 };

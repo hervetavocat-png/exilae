@@ -26,7 +26,7 @@ const AdminUpload = () => {
       formData.append('file', selectedFile);
       formData.append('folder', 'documents');
 
-      const response = await fetch('http://localhost:5001/api/uploads/single', {
+      const response = await fetch('https://exilae.onrender.com/api/uploads/single', {
         method: 'POST',
         body: formData,
       });

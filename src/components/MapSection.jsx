@@ -57,7 +57,7 @@ export default function MapSection() {
               <div className="text-gray-600">Dossiers traités</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-900 mb-2">95%</div>
+              <div className="text-3xl font-bold text-blue-900 mb-2">97%</div>
               <div className="text-gray-600">Taux de réussite</div>
             </div>
           </div>

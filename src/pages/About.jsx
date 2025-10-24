@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 import logoImage from '../IMG/logo.png'
 import backgroundImage from '../IMG/background.jpg'
 import gregoire from '../IMG/exilae.fr-gregoire-hervet-exilae-person.jpg'
-import margaux from '../IMG/exilae.fr-margaux-larroucau-margaux.png'
-import marta from '../IMG/exilae.fr-marta-nahay-sd-20220923-12659-marta-nahay-web.jpeg'
-import sanchez from '../IMG/exilae.fr-sanchez-previl-photo-up-20230906-hervet-5.jpg'
 
 export default function About() {
   const [selectedMember, setSelectedMember] = useState(null)
@@ -34,66 +31,23 @@ export default function About() {
     },
     {
       id: 2,
-      name: "Maître Margaux LARROUCAU",
-      title: "Avocate Associée",
-      speciality: "Droit de la famille et droit des étrangers",
-      image: margaux,
-      shortDesc: "Experte en regroupement familial",
-      fullDescription: "Maître LARROUCAU conjugue expertise en droit des étrangers et sensibilité aux questions familiales. Elle accompagne particulièrement les familles dans leurs démarches de regroupement familial et de régularisation, avec une approche humaine et personnalisée.",
+      name: "Maître Jonas CERISIER",
+      title: "Avocat Associé",
+      speciality: "Droit des étrangers",
+      image: null,
+      shortDesc: "Expert en contentieux administratif",
+      fullDescription: "Maître CERISIER met son expertise au service de la défense des droits des étrangers. Spécialisé en contentieux administratif, il accompagne ses clients dans leurs démarches de régularisation et de recours contre les mesures d'éloignement.",
       experience: "8+ ans d'expérience",
-      education: "Master en droit de la famille",
+      education: "Master en droit public",
       achievements: [
-        "Experte en regroupement familial",
-        "Plus de 300 dossiers de régularisation traités",
-        "Spécialiste des situations familiales complexes",
-        "Médiatrice certifiée en droit de la famille",
-        "Taux de réussite de 82% en droit familial"
+        "Expert en contentieux administratif",
+        "Spécialiste des procédures d'urgence",
+        "Plus de 300 dossiers traités avec succès",
+        "Intervenant en droit des étrangers"
       ],
-      languages: ["Français", "Anglais", "Italien"],
+      languages: ["Français", "Anglais"],
       phone: "01 84 74 87 20",
-      email: "m.larroucau@exilae.fr"
-    },
-    {
-      id: 3,
-      name: "Maître Marta NAHAY",
-      title: "Avocate Collaboratrice",
-      speciality: "Contentieux administratif et droit des étrangers",
-      image: marta,
-      shortDesc: "Spécialiste en procédures d'urgence",
-      fullDescription: "Maître NAHAY apporte son expertise en contentieux administratif au service de la défense des droits des étrangers. Elle excelle dans la préparation des recours et la représentation devant les tribunaux administratifs, particulièrement en référé-suspension.",
-      experience: "6+ ans d'expérience",
-      education: "Master en contentieux public",
-      achievements: [
-        "Spécialiste en procédures d'urgence",
-        "Taux de réussite de 85% en référé-suspension",
-        "Plus de 200 recours devant les TA traités",
-        "Experte en droit européen des étrangers",
-        "Formation continue en droit européen"
-      ],
-      languages: ["Français", "Anglais", "Polonais"],
-      phone: "01 84 74 87 20",
-      email: "m.nahay@exilae.fr"
-    },
-    {
-      id: 4,
-      name: "Maître Sanchez PREVIL",
-      title: "Avocat Collaborateur",
-      speciality: "Droit pénal et droit des étrangers",
-      image: sanchez,
-      shortDesc: "Double expertise pénal/administratif",
-      fullDescription: "Maître PREVIL combine expertise en droit pénal et droit des étrangers, offrant une approche globale dans les dossiers complexes impliquant des aspects pénaux et administratifs. Sa double compétence permet une prise en charge complète des situations les plus délicates.",
-      experience: "7+ ans d'expérience",
-      education: "Master en droit pénal",
-      achievements: [
-        "Double expertise pénal/administratif",
-        "Spécialiste des interdictions du territoire",
-        "Plus de 150 dossiers pénal-étrangers traités",
-        "Expert en droit pénal des étrangers",
-        "Formation spécialisée en droit pénal international"
-      ],
-      languages: ["Français", "Créole", "Anglais"],
-      phone: "01 84 74 87 20",
-      email: "s.previl@exilae.fr"
+      email: "j.cerisier@exilae.fr"
     }
   ]
 
@@ -142,7 +96,7 @@ export default function About() {
           </div>
 
           {/* Grid Netflix Style */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {teamMembers.map((member, index) => (
               <div
                 key={member.id}
@@ -156,13 +110,21 @@ export default function About() {
                 }}
               >
                 {/* Carte principale */}
-                <div className="relative overflow-hidden rounded-lg shadow-xl bg-white">
-                  <div className="aspect-[3/4] relative">
-                    <img 
-                      src={member.image} 
-                      alt={member.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                <div className="relative overflow-hidden rounded-lg shadow-xl bg-white max-w-sm mx-auto">
+                  <div className="aspect-[3/4] relative max-h-96">
+                    {member.image ? (
+                      <img 
+                        src={member.image} 
+                        alt={member.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <svg className="w-32 h-32 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    )}
                     
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
@@ -199,90 +161,10 @@ export default function About() {
         </div>
       </section>
 
-      {/* Section Certifications */}
+      {/* Section Reconnaissances Professionnelles */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
-              Certifications & Spécialisations
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Notre expertise reconnue par les institutions juridiques françaises
-            </p>
-          </div>
-
-          {/* Grid des certifications */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            
-            {/* Certificat CNB - Droit des étrangers */}
-            <div className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200">
-              {/* Badge certificat minimaliste */}
-              <div className="relative w-24 h-24 mx-auto mb-6">
-                <div className="w-full h-full bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-300">
-                  <div className="text-center">
-                    <div className="text-gray-700 font-bold text-xs">CNB</div>
-                    <div className="text-gray-700 text-2xl">⚖️</div>
-                  </div>
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-4" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
-                Certificat CNB
-              </h3>
-              <p className="text-gray-700 mb-4">
-                Spécialisation en <strong>Droit des étrangers</strong>
-              </p>
-              <p className="text-sm text-gray-600">
-                Certification officielle du Conseil National des Barreaux attestant de notre expertise en droit des étrangers
-              </p>
-            </div>
-
-            {/* Formation continue */}
-            <div className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200">
-              {/* Badge formation minimaliste */}
-              <div className="relative w-24 h-24 mx-auto mb-6">
-                <div className="w-full h-full bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-300">
-                  <div className="text-center">
-                    <div className="text-gray-700 font-bold text-xs">40H+</div>
-                    <div className="text-gray-700 text-2xl">📚</div>
-                  </div>
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-4" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
-                Formation Continue
-              </h3>
-              <p className="text-gray-700 mb-4">
-                <strong>40h+ annuelles</strong> de formation spécialisée
-              </p>
-              <p className="text-sm text-gray-600">
-                Mise à jour permanente des connaissances en droit des étrangers et contentieux administratif
-              </p>
-            </div>
-
-            {/* Expertise judiciaire */}
-            <div className="bg-white rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200">
-              {/* Badge expertise minimaliste */}
-              <div className="relative w-24 h-24 mx-auto mb-6">
-                <div className="w-full h-full bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-300">
-                  <div className="text-center">
-                    <div className="text-gray-700 font-bold text-xs">T.A.</div>
-                    <div className="text-gray-700 text-2xl">🏛️</div>
-                  </div>
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-4" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
-                Expertise Judiciaire
-              </h3>
-              <p className="text-gray-700 mb-4">
-                Reconnaissance par les <strong>Tribunaux Administratifs</strong>
-              </p>
-              <p className="text-sm text-gray-600">
-                Expertise reconnue par les juridictions administratives en matière de droit des étrangers
-              </p>
-            </div>
-
-          </div>
-
           {/* Section Reconnaissances */}
           <div className="bg-gray-50 rounded-3xl p-12">
             <h3 className="text-2xl font-bold text-center mb-12" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
@@ -312,7 +194,7 @@ export default function About() {
                   <i className="bx bx-trophy text-3xl" style={{color: '#12255D'}}></i>
                 </div>
                 <h4 className="font-bold mb-2" style={{color: '#12255D'}}>Taux de Réussite</h4>
-                <p className="text-gray-600 text-sm">85% de succès en contentieux administratif</p>
+                <p className="text-gray-600 text-sm">97% de succès en contentieux administratif</p>
               </div>
 
               <div className="text-center">
@@ -361,12 +243,22 @@ export default function About() {
               {/* Image */}
               <div className="lg:w-1/2 relative">
                 <div className="aspect-[4/5] lg:aspect-auto lg:h-full">
-                  <img 
-                    src={selectedMember.image} 
-                    alt={selectedMember.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 lg:to-white/30"></div>
+                  {selectedMember.image ? (
+                    <>
+                      <img 
+                        src={selectedMember.image} 
+                        alt={selectedMember.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/20 lg:to-white/30"></div>
+                    </>
+                  ) : (
+                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                      <svg className="w-48 h-48 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </div>
               

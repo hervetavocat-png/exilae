@@ -18,28 +18,22 @@ class ConsultationRequestModel {
       heure_souhaitee,
       message_complementaire,
       document_url,
-      documents_fournis = {},
-      date_entree_france,
-      mode_entree,
-      statut_familial,
-      statut_professionnel
+      documents_fournis = {}
     } = data;
 
     const query = `
       INSERT INTO consultation_requests 
       (nom, prenom, email, telephone, date_naissance, nationalite, situation_actuelle, 
        type_procedure, urgence_niveau, ville_consultation, date_souhaitee, 
-       heure_souhaitee, message_complementaire, document_url, documents_fournis,
-       date_entree_france, mode_entree, statut_familial, statut_professionnel)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
+       heure_souhaitee, message_complementaire, document_url, documents_fournis)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
       RETURNING *;
     `;
 
     const values = [
       nom, prenom, email, telephone, date_naissance, nationalite, situation_actuelle,
       type_procedure, urgence_niveau, ville_consultation, date_souhaitee,
-      heure_souhaitee, message_complementaire, document_url, JSON.stringify(documents_fournis),
-      date_entree_france, mode_entree, statut_familial, statut_professionnel
+      heure_souhaitee, message_complementaire, document_url, JSON.stringify(documents_fournis)
     ];
 
     const result = await db.query(query, values);

@@ -37,7 +37,7 @@ export default function FranceSection() {
               </h2>
               
               <p className="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
-                Nos avocats prennent en charge votre dossier partout en France. Nous avons un réseau de partenaires capable d'intervenir dans toutes les villes de France.
+                Nos avocats en droit des étrangers peuvent vous aider quel que soit votre lieu de résidence, devant tous les tribunaux administratifs de France.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 items-center justify-center lg:justify-start">

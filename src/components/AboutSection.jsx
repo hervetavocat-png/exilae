@@ -58,7 +58,7 @@ export default function AboutSection() {
             <div className="space-y-8">
               <div className="bg-gray-50 rounded-2xl p-6">
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Grâce à notre équipe d'avocats spécialisés en droit des étrangers, vous bénéficiez d'une assistance immédiate et personnalisée pour faire valoir vos droits.
+                  Vous bénéficiez d'une assistance immédiate et personnalisée pour faire valoir vos droits.
                 </p>
                 <p className="text-lg font-semibold leading-relaxed" style={{color: '#12255D'}}>
                   Que vous soyez confronté à une OQTF avec ou sans délai de départ volontaire, nos avocats vous fourniront une défense adaptée et complète.

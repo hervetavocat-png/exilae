@@ -20,11 +20,7 @@ router.post('/', async (req, res) => {
       heure_souhaitee,
       message_complementaire,
       document_url,
-      documents_fournis,
-      date_entree_france,
-      mode_entree,
-      statut_familial,
-      statut_professionnel
+      documents_fournis
     } = req.body;
 
     // Validation
@@ -49,11 +45,7 @@ router.post('/', async (req, res) => {
       heure_souhaitee,
       message_complementaire,
       document_url,
-      documents_fournis,
-      date_entree_france,
-      mode_entree,
-      statut_familial,
-      statut_professionnel
+      documents_fournis
     };
 
     const newConsultation = await ConsultationRequestModel.create(consultationData);

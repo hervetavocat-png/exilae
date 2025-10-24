@@ -111,7 +111,7 @@ export default function ReviewsSection() {
     const targets = {
       rating: 4.9,
       dossiers: 2000,
-      success: 95,
+      success: 97,
       experience: 15
     }
 

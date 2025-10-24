@@ -9,6 +9,10 @@ export default function Header({ onOpenPopup }) {
   const [closeTimer, setCloseTimer] = useState(null)
   const [locationCloseTimer, setLocationCloseTimer] = useState(null)
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+  }
+
   const handleMouseEnter = () => {
     if (closeTimer) {
       clearTimeout(closeTimer)
@@ -174,13 +178,14 @@ export default function Header({ onOpenPopup }) {
       {/* Mobile Navigation Menu */}
       <div className={`lg:hidden fixed top-16 sm:top-20 left-0 right-0 bg-white border-t border-gray-200 shadow-lg transition-all duration-300 ease-in-out z-40 ${isMobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
         <nav className="max-w-7xl mx-auto px-4 py-4 font-['Poppins'] overflow-y-auto max-h-[calc(100vh-5rem)]">
-              <a 
-                href="#" 
+              <Link 
+                to="/" 
+                onClick={closeMobileMenu}
                 className="flex items-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-3 rounded-md"
               >
                 <i className="bx bx-home text-xl mr-3"></i>
                 Home
-              </a>
+              </Link>
               
               {/* Mobile Services Menu */}
               <div className="mt-2">
@@ -205,19 +210,19 @@ export default function Header({ onOpenPopup }) {
                 {/* Mobile Services Submenu */}
                 {isServicesMenuOpen && (
                   <div className="ml-6 mt-2 space-y-1">
-                    <Link to="/oqtf-simple" className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
+                    <Link to="/oqtf-simple" onClick={closeMobileMenu} className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
                       <i className="bx bx-file-blank text-base mr-3"></i>
                       OQTF Simple
                     </Link>
-                    <Link to="/oqtf-assignation" className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
+                    <Link to="/oqtf-assignation" onClick={closeMobileMenu} className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
                       <i className="bx bx-home-heart text-base mr-3"></i>
                       OQTF avec assignation à résidence
                     </Link>
-                    <Link to="/oqtf-placement" className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
+                    <Link to="/oqtf-placement" onClick={closeMobileMenu} className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
                       <i className="bx bx-lock text-base mr-3"></i>
                       OQTF avec placement en rétention
                     </Link>
-                    <Link to="/irtf" className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
+                    <Link to="/irtf" onClick={closeMobileMenu} className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
                       <i className="bx bx-block text-base mr-3"></i>
                       IRTF (Interdiction de retour)
                     </Link>
@@ -227,6 +232,7 @@ export default function Header({ onOpenPopup }) {
               
               <Link 
                 to="/about" 
+                onClick={closeMobileMenu}
                 className="flex items-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-3 rounded-md mt-2"
               >
                 <i className="bx bx-info-circle text-xl mr-3"></i>
@@ -256,11 +262,11 @@ export default function Header({ onOpenPopup }) {
                 {/* Mobile Location Submenu */}
                 {isLocationMenuOpen && (
                   <div className="ml-6 mt-2 space-y-1">
-                    <Link to="/paris" className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
+                    <Link to="/paris" onClick={closeMobileMenu} className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
                       <i className="bx bx-buildings text-base mr-3"></i>
                       Paris
                     </Link>
-                    <Link to="/nice" className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
+                    <Link to="/nice" onClick={closeMobileMenu} className="flex items-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-2 rounded-md text-sm">
                       <i className="bx bx-sun text-base mr-3"></i>
                       Nice
                     </Link>
@@ -270,6 +276,7 @@ export default function Header({ onOpenPopup }) {
               
               <Link 
                 to="/blog" 
+                onClick={closeMobileMenu}
                 className="flex items-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-all duration-200 px-3 py-3 rounded-md mt-2"
               >
                 <i className="bx bx-edit text-xl mr-3"></i>

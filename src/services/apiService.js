@@ -1,5 +1,7 @@
 // Configuration de base pour l'API
-const API_BASE_URL = 'http://localhost:5001/api';
+// En local : http://localhost:5001/api
+// En production : https://exilae.onrender.com/api
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
 class ApiService {
   constructor() {

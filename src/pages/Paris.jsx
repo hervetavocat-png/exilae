@@ -69,7 +69,7 @@ export default function Paris() {
             <h2 className="text-4xl lg:text-5xl font-bold mb-4" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
               Cabinet EXILAE AVOCATS - Paris
             </h2>
-            <p className="text-xl lg:text-2xl text-gray-600 font-medium">Spécialistes en droit des étrangers</p>
+            <p className="text-xl lg:text-2xl text-gray-600 font-medium">Experts en droit des étrangers, droit du travail et droit pénal</p>
           </div>
         </div>
       </section>

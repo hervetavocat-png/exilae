@@ -9,7 +9,7 @@ export default function IRTF() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Logo Section - en dehors */}
-      <section className="py-20 bg-white pt-32">
+      <section className="hidden lg:block py-20 bg-white pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <img 
             src={logoImage} 
@@ -20,7 +20,7 @@ export default function IRTF() {
       </section>
 
       {/* Hero Section Bleu - seulement les titres */}
-      <div className="text-white relative overflow-hidden" style={{backgroundColor: '#12255D'}}>
+      <div className="text-white relative overflow-hidden pt-20 lg:pt-0" style={{backgroundColor: '#12255D'}}>
         <div className="absolute right-0 top-0 w-full h-full pointer-events-none">
           <svg className="absolute right-0 top-0 w-full h-full opacity-15" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMid slice">
             <defs>

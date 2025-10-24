@@ -12,11 +12,6 @@ export default function ContactPopup({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     situation: '',
     urgency: '',
-    nationality: '',
-    entryDate: '',
-    entryMode: '',
-    familyStatus: '',
-    professionalStatus: '',
     contact: {
       firstName: '',
       lastName: '',
@@ -28,7 +23,7 @@ export default function ContactPopup({ isOpen, onClose }) {
     }
   })
 
-  const totalSteps = 8
+  const totalSteps = 3
   const progress = (currentStep / totalSteps) * 100
 
   const steps = [
@@ -39,36 +34,11 @@ export default function ContactPopup({ isOpen, onClose }) {
     },
     {
       id: 2,
-      title: "Urgence", 
-      icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" /></svg>
+      title: "Comment vous contacter ?", 
+      icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
     },
     {
       id: 3,
-      title: "Nationalité",
-      icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd" /></svg>
-    },
-    {
-      id: 4,
-      title: "Entrée",
-      icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
-    },
-    {
-      id: 5,
-      title: "Mode d'entrée",
-      icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
-    },
-    {
-      id: 6,
-      title: "Familial",
-      icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" /></svg>
-    },
-    {
-      id: 7,
-      title: "Professionnel",
-      icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" /><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" /></svg>
-    },
-    {
-      id: 8,
       title: "Contact",
       icon: <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
     }
@@ -192,7 +162,8 @@ export default function ContactPopup({ isOpen, onClose }) {
           formDataUpload.append('userEmail', formData.contact.email)
           
           // Upload direct vers l'API
-          const response = await fetch('http://localhost:5001/api/uploads/single', {
+          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+          const response = await fetch(`${apiUrl}/uploads/single`, {
             method: 'POST',
             body: formDataUpload
           })
@@ -228,18 +199,8 @@ export default function ContactPopup({ isOpen, onClose }) {
         situation_actuelle: formData.contact.message || `Situation: ${formData.situation}`,
         type_procedure: formData.situation || 'OQTF',
         urgence_niveau: mapUrgencyLevel(formData.urgency),
-        nationalite: formData.nationality || '',
-        date_entree_france: formData.entryDate || '',
-        mode_entree: formData.entryMode || '',
-        statut_familial: formData.familyStatus || '',
-        statut_professionnel: formData.professionalStatus || '',
         message_complementaire: `Type OQTF: ${formData.situation}
-Niveau d'urgence: ${formData.urgency}
-Nationalité: ${formData.nationality || 'Non renseignée'}
-Date d'entrée en France: ${formData.entryDate || 'Non renseignée'}
-Mode d'entrée: ${formData.entryMode || 'Non renseigné'}
-Statut familial: ${formData.familyStatus || 'Non renseigné'}
-Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formData.contact.document ? '\nDocument joint: ' + formData.contact.document.name : ''}`,
+Mode de contact préféré: ${formData.urgency}${formData.contact.document ? '\nDocument joint: ' + formData.contact.document.name : ''}`,
         document_url: documentUrl,
         documents_fournis: formData.contact.document ? {
           nom_fichier: formData.contact.document.name,
@@ -296,14 +257,12 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
     }
   }
 
-  // Fonction pour mapper le niveau d'urgence
-  const mapUrgencyLevel = (urgency) => {
-    switch(urgency) {
-      case 'Très urgent (48h)': return 'urgent'
-      case 'Urgent (7 jours)': return 'urgent'
-      case 'Standard (30 jours)': return 'important'
-      case 'Pas d\'urgence': return 'normal'
-      default: return 'normal'
+  // Fonction pour mapper le mode de contact
+  const mapUrgencyLevel = (contactMode) => {
+    switch(contactMode) {
+      case 'par téléphone ?': return 'telephone'
+      case 'en visioconférence ?': return 'visioconference'
+      default: return 'telephone'
     }
   }
 
@@ -331,12 +290,7 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
     switch(currentStep) {
       case 1: return formData.situation
       case 2: return formData.urgency
-      case 3: return formData.nationality
-      case 4: return formData.entryDate
-      case 5: return formData.entryMode
-      case 6: return formData.familyStatus
-      case 7: return formData.professionalStatus
-      case 8: return formData.contact.firstName && formData.contact.lastName && formData.contact.email && formData.contact.phone
+      case 3: return formData.contact.firstName && formData.contact.lastName && formData.contact.email && formData.contact.phone
       default: return false
     }
   }
@@ -344,13 +298,8 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
   const getStepContent = () => {
     switch(currentStep) {
       case 1: return { title: "Votre situation", subtitle: "Quel type d'OQTF avez-vous reçu ?" }
-      case 2: return { title: "Niveau d'urgence", subtitle: "Évaluons l'urgence de votre situation" }
-      case 3: return { title: "Votre nationalité", subtitle: "Quelle est votre nationalité ?" }
-      case 4: return { title: "Votre date d'entrée en France", subtitle: "Quand êtes-vous entré(e) en France ?" }
-      case 5: return { title: "Votre mode d'entrée en France", subtitle: "Comment êtes-vous entré(e) en France ?" }
-      case 6: return { title: "Votre statut familial", subtitle: "Quelle est votre situation familiale ?" }
-      case 7: return { title: "Votre statut professionnel", subtitle: "Quelle est votre situation professionnelle ?" }
-      case 8: return { title: "Vos coordonnées", subtitle: "Vous allez être rappelé dans la journée pour que nos avocats prennent en charge votre OQTF" }
+      case 2: return { title: "Comment vous contacter ?", subtitle: "Choisissez votre mode de contact préféré" }
+      case 3: return { title: "Vos coordonnées", subtitle: "Vous allez être rappelé dans la journée pour que nos avocats prennent en charge votre OQTF" }
       default: return { title: "", subtitle: "" }
     }
   }
@@ -370,7 +319,7 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
       ></div>
       
       {/* Popup Content */}
-      <div className={`relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden transform transition-all duration-500 ease-out flex flex-col ${
+      <div className={`relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] mx-4 overflow-hidden transform transition-all duration-500 ease-out flex flex-col ${
         isAnimating 
           ? 'scale-100 translate-y-0 opacity-100' 
           : 'scale-95 translate-y-4 opacity-0'
@@ -416,20 +365,20 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
           <div className="flex justify-between">
             {steps.map((step) => (
               <div key={step.id} className="flex flex-col items-center">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
                   currentStep >= step.id 
                     ? 'bg-white text-blue-600' 
                     : 'bg-white/30 text-white'
                 }`}>
                   {currentStep > step.id ? (
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   ) : (
                     step.id
                   )}
                 </div>
-                <span className={`text-xs mt-1 ${
+                <span className={`hidden sm:block text-xs mt-1 ${
                   currentStep >= step.id ? 'text-white font-semibold' : 'text-white/60'
                 }`}>
                   {step.title}
@@ -509,7 +458,7 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
 
             {currentStep === 2 && (
               <div className="space-y-3">
-                {['Très urgent (48h)', 'Urgent (7 jours)', 'Standard (30 jours)', 'Pas d\'urgence'].map((option) => (
+                {['par téléphone ?', 'en visioconférence ?'].map((option) => (
                   <button
                     key={option}
                     onClick={() => handleOptionSelect('urgency', option)}
@@ -537,92 +486,6 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
             )}
 
             {currentStep === 3 && (
-              <div className="space-y-3">
-                <input
-                  type="text"
-                  value={formData.nationality}
-                  onChange={(e) => handleOptionSelect('nationality', e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
-                  placeholder="Votre nationalité"
-                />
-              </div>
-            )}
-
-            {currentStep === 4 && (
-              <div className="space-y-3">
-                <input
-                  type="date"
-                  value={formData.entryDate}
-                  onChange={(e) => handleOptionSelect('entryDate', e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
-                />
-              </div>
-            )}
-
-            {currentStep === 5 && (
-              <div className="space-y-3">
-                {['Visa touristique', 'Visa étudiant', 'Sans visa', 'Autre'].map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => handleOptionSelect('entryMode', option)}
-                    className={`w-full p-3 text-left rounded-lg border-2 transition-all duration-300 ${
-                      formData.entryMode === option ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-4 h-4 rounded-full border-2 mr-3 ${formData.entryMode === option ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}`}>
-                        {formData.entryMode === option && <div className="w-full h-full rounded-full bg-white scale-50"></div>}
-                      </div>
-                      <span className="text-sm font-medium">{option}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {currentStep === 6 && (
-              <div className="space-y-3">
-                {['Marié(e)', 'Célibataire', 'Pacsé(e)', 'Enfants français', 'Autre'].map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => handleOptionSelect('familyStatus', option)}
-                    className={`w-full p-3 text-left rounded-lg border-2 transition-all duration-300 ${
-                      formData.familyStatus === option ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-4 h-4 rounded-full border-2 mr-3 ${formData.familyStatus === option ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}`}>
-                        {formData.familyStatus === option && <div className="w-full h-full rounded-full bg-white scale-50"></div>}
-                      </div>
-                      <span className="text-sm font-medium">{option}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {currentStep === 7 && (
-              <div className="space-y-3">
-                {['Salarié(e)', 'Étudiant(e)', 'Sans emploi', 'Travailleur indépendant', 'Autre'].map((option) => (
-                  <button
-                    key={option}
-                    onClick={() => handleOptionSelect('professionalStatus', option)}
-                    className={`w-full p-3 text-left rounded-lg border-2 transition-all duration-300 ${
-                      formData.professionalStatus === option ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-4 h-4 rounded-full border-2 mr-3 ${formData.professionalStatus === option ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}`}>
-                        {formData.professionalStatus === option && <div className="w-full h-full rounded-full bg-white scale-50"></div>}
-                      </div>
-                      <span className="text-sm font-medium">{option}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {currentStep === 8 && (
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
