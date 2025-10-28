@@ -5,7 +5,6 @@ import logoImage from '../IMG/logo.png'
 import cabinetNiceImage from '../IMG/cabinet_nice.png'
 import backgroundImage from '../IMG/background.jpg'
 import ServicesGrid from '../components/ServicesGrid'
-import FAQSection from '../components/FAQSection'
 import ReviewsSection from '../components/ReviewsSection'
 
 export default function Nice() {
@@ -258,8 +257,8 @@ export default function Nice() {
                 Téléphone
               </h4>
               <p className="text-gray-600">
-                <a href="tel:0184748720" className="text-2xl font-bold hover:text-blue-600 transition-colors" style={{color: '#12255D'}}>
-                  01 84 74 87 20
+                <a href="tel:0763560150" className="text-2xl font-bold hover:text-blue-600 transition-colors" style={{color: '#12255D'}}>
+                  07 63 56 01 50
                 </a>
               </p>
             </div>
@@ -286,9 +285,6 @@ export default function Nice() {
 
       {/* Avis clients */}
       <ReviewsSection />
-
-      {/* FAQ */}
-      <FAQSection />
     </div>
   )
 }

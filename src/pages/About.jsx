@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import logoImage from '../IMG/logo.png'
 import backgroundImage from '../IMG/background.jpg'
 import gregoire from '../IMG/exilae.fr-gregoire-hervet-exilae-person.jpg'
+import jonas from '../IMG/jonas.png'
 
 export default function About() {
   const [selectedMember, setSelectedMember] = useState(null)
@@ -23,30 +24,30 @@ export default function About() {
         "Spécialiste reconnu en droit des étrangers",
         "Fondateur du cabinet EXILAE",
         "Intervenant en formations juridiques",
-        "Taux de réussite de 87% en contentieux"
+            "Taux de réussite de 97% en contentieux"
       ],
       languages: ["Français", "Anglais", "Espagnol"],
-      phone: "01 84 74 87 20",
+      phone: "07 63 56 01 50",
       email: "g.hervet@exilae.fr"
     },
     {
       id: 2,
-      name: "Maître Jonas CERISIER",
-      title: "Avocat Associé",
+          name: "Jonas CERISIER",
+          title: "Juriste",
       speciality: "Droit des étrangers",
-      image: null,
-      shortDesc: "Expert en contentieux administratif",
-      fullDescription: "Maître CERISIER met son expertise au service de la défense des droits des étrangers. Spécialisé en contentieux administratif, il accompagne ses clients dans leurs démarches de régularisation et de recours contre les mesures d'éloignement.",
-      experience: "8+ ans d'expérience",
+      image: jonas,
+      shortDesc: "Juriste",
+      fullDescription: "Jonas CERISIER, juriste, accompagne ses clients dans leurs démarches de régularisation et de recours contre les mesures d'éloignement.",
+      experience: "Juriste en formation",
       education: "Master en droit public",
       achievements: [
-        "Expert en contentieux administratif",
-        "Spécialiste des procédures d'urgence",
-        "Plus de 300 dossiers traités avec succès",
-        "Intervenant en droit des étrangers"
+        "Juriste",
+        "Formation en contentieux administratif",
+        "Accompagnement des clients en régularisation",
+        "Développement d'expertise en procédures d'urgence"
       ],
       languages: ["Français", "Anglais"],
-      phone: "01 84 74 87 20",
+      phone: "07 63 56 01 50",
       email: "j.cerisier@exilae.fr"
     }
   ]
@@ -209,12 +210,6 @@ export default function About() {
           </div>
 
           {/* Call to action */}
-          <div className="text-center mt-16">
-            <div className="inline-flex items-center bg-blue-50 rounded-full px-6 py-3 text-blue-800">
-              <i className="bx bx-check-circle mr-2"></i>
-              <span className="font-semibold">Cabinet certifié et reconnu par les instances juridiques françaises</span>
-            </div>
-          </div>
 
         </div>
       </section>

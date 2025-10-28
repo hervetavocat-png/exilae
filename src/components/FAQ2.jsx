@@ -120,9 +120,9 @@ export default function FAQ2() {
               Notre équipe d'avocats spécialisés est là pour vous aider
             </p>
             <button 
-              onClick={() => window.location.href = 'tel:0184748720'}
+              onClick={() => window.location.href = 'tel:0763560150'}
               className="bg-red-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 shadow-xl"
-              title="Appeler le 01 84 74 87 20"
+              title="Appeler le 07 63 56 01 50"
             >
               Contactez-nous
             </button>

@@ -167,7 +167,7 @@ export default function PolitiqueConfidentialite() {
                 
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <ul className="space-y-2 text-gray-700">
-                    <li><strong>Par téléphone :</strong> 01 84 74 87 20</li>
+                    <li><strong>Par téléphone :</strong> 07 63 56 01 50</li>
                     <li><strong>Par email :</strong> contact@urgence-oqtf.fr</li>
                     <li><strong>Par courrier :</strong> Urgence-oqtf.fr Chez EXILAE Avocats 94 boulevard Flandrin 75116 Paris</li>
                   </ul>
@@ -184,7 +184,7 @@ export default function PolitiqueConfidentialite() {
                 <div className="bg-blue-50 p-6 rounded-xl mb-4">
                   <p className="text-gray-700 font-semibold mb-3">Maître Grégoire HERVET</p>
                   <ul className="space-y-2 text-gray-700">
-                    <li><strong>Par téléphone :</strong> 01 84 74 87 20</li>
+                    <li><strong>Par téléphone :</strong> 07 63 56 01 50</li>
                     <li><strong>Par email :</strong> contact@urgence-oqtf.fr</li>
                     <li><strong>Par courrier :</strong> Urgence-oqtf.fr Chez EXILAE Avocats 94 boulevard Flandrin 75116 Paris</li>
                   </ul>
@@ -222,7 +222,7 @@ export default function PolitiqueConfidentialite() {
               <div className="bg-gradient-to-r from-blue-50 to-red-50 p-6 rounded-xl mb-6">
                 <p className="text-gray-700 font-semibold mb-3">Maître Grégoire HERVET</p>
                 <ul className="space-y-2 text-gray-700">
-                  <li><strong>Par téléphone :</strong> 01 84 74 87 20</li>
+                  <li><strong>Par téléphone :</strong> 07 63 56 01 50</li>
                   <li><strong>Par email :</strong> contact@urgence-oqtf.fr</li>
                   <li><strong>Par courrier :</strong> Urgence-oqtf.fr Chez EXILAE Avocats 94 boulevard Flandrin 75116 Paris</li>
                 </ul>

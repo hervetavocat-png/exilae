@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
-import CitySection from './components/CitySection'
 import ServicesGrid from './components/ServicesGrid'
 import FranceSection from './components/FranceSection'
 import MapSection from './components/MapSection'
@@ -18,6 +17,7 @@ import ReviewsSection from './components/ReviewsSection'
 import Footer from './components/Footer'
 import ContactPopup from './components/ContactPopup'
 import ScrollToTop from './components/ScrollToTop'
+import FloatingButtons from './components/FloatingButtons'
 
 // Import pages
 import Home from './pages/Home'
@@ -117,6 +117,8 @@ export default function App() {
         isOpen={showPopup} 
         onClose={handleClosePopup} 
       />
+      
+      <FloatingButtons onOpenPopup={handleOpenPopup} />
     </div>
   )
 }

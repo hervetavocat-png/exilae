@@ -574,8 +574,8 @@ export default function ReviewsSection() {
                     </div>
                     <div>
                       <p className="text-xs text-gray-400 mb-0.5">Téléphone</p>
-                      <a href="tel:0184748720" className="text-base font-medium hover:underline" style={{color: '#12255D'}}>
-                        01 84 74 87 20
+                      <a href="tel:0763560150" className="text-base font-medium hover:underline" style={{color: '#12255D'}}>
+                        07 63 56 01 50
                       </a>
                     </div>
                   </div>

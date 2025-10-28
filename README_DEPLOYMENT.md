@@ -35,3 +35,5 @@ Variables d'environnement configurées sur Render Dashboard :
 - `SUPABASE_STORAGE_URL` - URL storage Supabase
 
 
+
+

@@ -312,7 +312,7 @@ export default function HeroSection() {
               className="h-16 w-auto"
             />
             <div className="text-white">
-              <p className="text-lg font-light opacity-90">Un service proposé par le Cabinet EXILAE Avocats,<br />cabinet de référence en droit des étrangers</p>
+              <p className="text-lg font-light opacity-90">Un service proposé par le Cabinet EXILAE Avocats</p>
             </div>
           </div>
         </div>
@@ -332,10 +332,10 @@ export default function HeroSection() {
           
           <div className="flex justify-center">
             <button 
-              onClick={() => window.location.href = 'tel:0184748720'}
+              onClick={() => window.location.href = 'tel:0763560150'}
               className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
               style={{fontFamily: 'Poppins, sans-serif'}}
-              title="Appeler le 01 84 74 87 20"
+              title="Appeler le 07 63 56 01 50"
             >
               Annulez votre OQTF maintenant !
             </button>
@@ -406,7 +406,7 @@ export default function HeroSection() {
                   
                   {/* Description */}
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    Avec votre avocat en droit des étrangers
+                    Prise de rendez vous avec votre avocat au téléphone, en visio ou au cabinet et signature de la convention d'honoraire
                   </p>
                 </div>
                 
@@ -438,7 +438,7 @@ export default function HeroSection() {
                   
                   {/* Description */}
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    Prise en charge de votre dossier, en présentiel ou à distance sur toute la France
+                    Prise en charge de votre dossier immédiatement par votre avocat en droit des étrangers
                   </p>
                 </div>
               </div>
@@ -488,7 +488,7 @@ export default function HeroSection() {
                   </h3>
                 </div>
                 <p className="text-xs text-gray-600">
-                  Planification avec nos experts juridiques
+                  Prise de rendez vous avec votre avocat au téléphone, en visio ou au cabinet et signature de la convention d'honoraire
                 </p>
               </div>
               {/* Connecting Line */}
@@ -512,7 +512,7 @@ export default function HeroSection() {
                   </h3>
                 </div>
                 <p className="text-xs text-gray-600">
-                  Consultation approfondie dans nos bureaux
+                  Prise en charge de votre dossier immédiatement par votre avocat en droit des étrangers
                 </p>
               </div>
             </div>

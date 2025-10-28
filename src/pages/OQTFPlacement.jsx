@@ -1,6 +1,5 @@
 import React from 'react'
 import oqtfPlacementImage from '../IMG/OQTF_placement.png'
-import logoImage from '../IMG/logo.png'
 import ServicesGrid from '../components/ServicesGrid'
 import FAQ2 from '../components/FAQ2'
 import CallButton from '../components/CallButton'
@@ -8,19 +7,11 @@ import CallButton from '../components/CallButton'
 export default function OQTFPlacement() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Logo Section - en dehors */}
-      <section className="hidden lg:block py-20 bg-white pt-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <img 
-            src={logoImage} 
-            alt="Logo Exilae Avocats" 
-            className="h-32 lg:h-40 w-auto mx-auto"
-          />
-        </div>
-      </section>
-
+      {/* Espace blanc - seulement sur desktop */}
+      <div className="hidden lg:block bg-white pt-32 pb-8"></div>
+      
       {/* Hero Section Bleu - seulement les titres */}
-      <div className="text-white relative overflow-hidden pt-20 lg:pt-0" style={{backgroundColor: '#12255D'}}>
+      <div className="text-white relative overflow-hidden pt-32 lg:pt-16 pb-16" style={{backgroundColor: '#12255D'}}>
         <div className="absolute right-0 top-0 w-full h-full pointer-events-none">
           <svg className="absolute right-0 top-0 w-full h-full opacity-15" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMid slice">
             <defs>
@@ -65,7 +56,7 @@ export default function OQTFPlacement() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                   </div>
-                  <span className="font-bold text-xs sm:text-base" style={{color: '#1E40AF', fontFamily: 'Poppins, sans-serif'}}>Avocats spécialisés</span>
+                  <span className="font-bold text-xs sm:text-base" style={{color: '#1E40AF', fontFamily: 'Poppins, sans-serif'}}>Avocat expert</span>
                 </div>
                 
                 <div className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:text-left">

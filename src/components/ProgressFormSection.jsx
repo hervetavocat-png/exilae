@@ -10,10 +10,12 @@ export default function ProgressFormSection() {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [formData, setFormData] = useState({
+    situation: '',
     oqtfType: '',
     nationality: '',
     entryDate: '',
     entryMode: '',
+    familyStatus: '',
     professionalStatus: '',
     contact: {
       firstName: '',
@@ -28,67 +30,33 @@ export default function ProgressFormSection() {
     AOS.init()
   }, [])
 
-  const totalSteps = 6
+  const totalSteps = 3
   const progress = (currentStep / totalSteps) * 100
 
   const steps = [
     {
       id: 1,
-      title: "Type d'OQTF",
-      icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" /></svg>,
-      question: "Quel type d'OQTF avez-vous reçu ?",
+      title: "Votre situation",
+      icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>,
+      question: "Quelle est votre situation actuelle ?",
       options: [
-        { value: "simple", label: "OQTF simple (30 jours)" },
-        { value: "assignation", label: "Assignation à résidence" },
-        { value: "retention", label: "Avec placement en CRA (Centre de Rétention Administrative)" },
-        { value: "irtf", label: "IRTF" }
+        { value: "oqtf_recu", label: "J'ai reçu une OQTF", description: "Obligation de quitter le territoire français" },
+        { value: "pas_oqtf_question", label: "Je n'ai pas reçu d'OQTF mais j'ai une question en droit des étrangers", description: "Question générale en droit des étrangers" }
       ]
     },
     {
       id: 2,
-      title: "Nationalité",
-      icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd" /></svg>,
-      question: "Quelle est votre nationalité ?",
-      isInput: true,
-      inputType: "text",
-      placeholder: "Votre nationalité"
+      title: "Nous allons vous aider",
+      icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" /></svg>,
+      question: "Quel type d'OQTF avez-vous reçu ?",
+      options: [
+        { value: "simple", label: "OQTF sans mesure privative de liberté", description: "30 jours pour contester" },
+        { value: "assignation", label: "OQTF avec assignation à résidence", description: "7 jours pour contester" },
+        { value: "retention", label: "OQTF avec rétention", description: "Placement immédiat en centre de rétention" }
+      ]
     },
     {
       id: 3,
-      title: "Entrée",
-      icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>,
-      question: "Quand êtes-vous entré(e) en France ?",
-      isInput: true,
-      inputType: "date",
-      placeholder: ""
-    },
-    {
-      id: 4,
-      title: "Mode d'entrée",
-      icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>,
-      question: "Comment êtes-vous entré(e) en France ?",
-      options: [
-        { value: "visa_touristique", label: "Visa touristique" },
-        { value: "visa_etudiant", label: "Visa étudiant" },
-        { value: "sans_visa", label: "Sans visa" },
-        { value: "autre", label: "Autre" }
-      ]
-    },
-    {
-      id: 5,
-      title: "Professionnel",
-      icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" /><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" /></svg>,
-      question: "Quelle est votre situation professionnelle ?",
-      options: [
-        { value: "salarie", label: "Salarié(e)" },
-        { value: "etudiant", label: "Étudiant(e)" },
-        { value: "sans_emploi", label: "Sans emploi" },
-        { value: "independant", label: "Travailleur indépendant" },
-        { value: "autre", label: "Autre" }
-      ]
-    },
-    {
-      id: 6,
       title: "Contact",
       icon: <svg className="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>,
       question: "Vous allez être rappelé dans la journée pour que nos avocats prennent en charge votre OQTF",
@@ -201,18 +169,16 @@ export default function ProgressFormSection() {
         email: formData.contact.email,
         telephone: formData.contact.phone,
         ville_consultation: 'Non spécifiée',
-        situation_actuelle: `Type OQTF: ${formData.oqtfType}`,
-        type_procedure: formData.oqtfType || 'OQTF',
+        situation_actuelle: `Situation actuelle: ${formData.situation}. Type d'OQTF concerné: ${formData.oqtfType}. Demande d'évaluation et d'accompagnement juridique.`,
+        type_procedure: formData.oqtfType || formData.situation || 'OQTF',
         urgence_niveau: mapUrgencyLevel(formData.oqtfType),
         nationalite: formData.nationality || '',
         date_entree_france: formData.entryDate || null,
         mode_entree: formData.entryMode || '',
+        statut_familial: formData.familyStatus || '',
         statut_professionnel: formData.professionalStatus || '',
-        message_complementaire: `Type d'OQTF: ${formData.oqtfType}
-Nationalité: ${formData.nationality || 'Non renseignée'}
-Date d'entrée en France: ${formData.entryDate || 'Non renseignée'}
-Mode d'entrée: ${formData.entryMode || 'Non renseigné'}
-Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formData.contact.document ? '\nDocument joint: ' + formData.contact.document.name : ''}`,
+        message_complementaire: `Situation: ${formData.situation}
+Type d'OQTF: ${formData.oqtfType}${formData.contact.document ? '\nDocument joint: ' + formData.contact.document.name : ''}`,
         document_url: documentUrl,
         documents_fournis: formData.contact.document ? {
           nom_fichier: formData.contact.document.name,
@@ -243,10 +209,12 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
         setTimeout(() => {
           setCurrentStep(1)
           setFormData({
+            situation: '',
             oqtfType: '',
             nationality: '',
             entryDate: '',
             entryMode: '',
+            familyStatus: '',
             professionalStatus: '',
             contact: {
               firstName: '',
@@ -293,7 +261,7 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
             </svg>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif', fontWeight: 'bold'}}>
-            Estimez le coût de votre dossier
+            Analysons ensemble votre situation
           </h2>
           <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-600">
             Répondez à quelques questions pour obtenir une première évaluation de votre situation
@@ -385,24 +353,23 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
             <div className="mb-8">
               <input
                 type={currentStepData.inputType}
-                value={currentStep === 2 ? formData.nationality : formData.entryDate}
-                onChange={(e) => handleOptionSelect(currentStep === 2 ? 'nationality' : 'entryDate', e.target.value)}
+                value={currentStep === 3 ? formData.nationality : formData.entryDate}
+                onChange={(e) => handleOptionSelect(currentStep === 3 ? 'nationality' : 'entryDate', e.target.value)}
                 className="w-full px-6 py-4 border-2 border-gray-300 rounded-2xl focus:border-red-500 focus:outline-none text-lg transition-all"
                 placeholder={currentStepData.placeholder}
               />
             </div>
           ) : !currentStepData.isContact ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div className={`grid grid-cols-1 gap-4 mb-8 ${currentStep === 1 ? 'md:grid-cols-2 md:grid-flow-col md:auto-cols-fr' : 'md:grid-cols-2'}`}>
               {currentStepData.options.map((option, index) => {
-                const fieldName = currentStep === 1 ? 'oqtfType' : 
-                                currentStep === 4 ? 'entryMode' : 'professionalStatus'
+                const fieldName = currentStep === 1 ? 'situation' : 'oqtfType'
                 
                 const isSelected = formData[fieldName] === option.value
                 
                 return (
                   <div
                     key={option.value}
-                    className={`relative group ${currentStepData.options.length % 2 !== 0 && index === currentStepData.options.length - 1 ? 'md:col-span-2' : ''}`}
+                    className={`relative group ${currentStep !== 1 && currentStepData.options.length % 2 !== 0 && index === currentStepData.options.length - 1 ? 'md:col-span-2' : ''}`}
                   >
                     <input
                       type="radio"
@@ -732,12 +699,9 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
 
   function getCurrentFieldValue() {
     switch(currentStep) {
-      case 1: return formData.oqtfType
-      case 2: return formData.nationality
-      case 3: return formData.entryDate
-      case 4: return formData.entryMode
-      case 5: return formData.professionalStatus
-      case 6: return isContactFormValid()
+      case 1: return formData.situation
+      case 2: return formData.oqtfType
+      case 3: return isContactFormValid()
       default: return false
     }
   }
@@ -753,24 +717,14 @@ Statut professionnel: ${formData.professionalStatus || 'Non renseigné'}${formDa
 
   function getOptionDescription(fieldName, value) {
     const descriptions = {
+      situation: {
+        'oqtf_recu': 'Obligation de quitter le territoire français',
+        'pas_oqtf_question': 'Question générale en droit des étrangers'
+      },
       oqtfType: {
-        'simple': 'Délai standard pour quitter le territoire',
-        'assignation': 'Obligation de résider à une adresse',
-        'retention': 'Placement immédiat en centre de rétention',
-        'irtf': 'Interdiction de revenir en France',
-        'pas_encore': 'Évaluation préventive de votre situation'
-      },
-      timeline: {
-        'moins_7j': 'Délai très court, action urgente requise',
-        '7_15j': 'Délai court, procédure d\'urgence',
-        '15_30j': 'Délai standard, recours possible',
-        'plus_30j': 'Délai dépassé, options limitées'
-      },
-      family: {
-        'conjoint_francais': 'Mariage avec ressortissant français',
-        'enfants_francais': 'Parent d\'enfants de nationalité française',
-        'parents_france': 'Famille résidant légalement en France',
-        'aucune': 'Pas d\'attaches familiales particulières'
+        'simple': '30 jours pour contester',
+        'assignation': '7 jours pour contester',
+        'retention': 'Placement immédiat en centre de rétention'
       }
     }
     

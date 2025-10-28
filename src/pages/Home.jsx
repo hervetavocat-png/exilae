@@ -1,6 +1,5 @@
 import React from 'react'
 import HeroSection from '../components/HeroSection'
-import CitySection from '../components/CitySection'
 import ServicesGrid from '../components/ServicesGrid'
 import FranceSection from '../components/FranceSection'
 import MapSection from '../components/MapSection'
@@ -19,7 +18,6 @@ export default function Home() {
     <div>
       <HeroSection />
       <AboutSection />
-      <CitySection />
       <ProgressFormSection />
       
       <ServicesGrid />
