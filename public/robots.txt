@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://urgence-oqtf.fr/sitemap.xml
+
+# IndexNow pour indexation immédiate (Bing, Copilot, ChatGPT Search)
+IndexNow: https://www.bing.com/indexnow
+
+# Pages à ne pas indexer
+Disallow: /api/
+Disallow: /admin/
+

@@ -112,7 +112,7 @@ export default function ReviewsSection() {
       rating: 4.9,
       dossiers: 2000,
       success: 97,
-      experience: 15
+      experience: 10
     }
 
     const duration = 2000 // 2 secondes
@@ -544,26 +544,19 @@ export default function ReviewsSection() {
           </div>
         </div>
 
-        {/* Vimeo Video avec coordonnées - Design sobre Apple */}
-        <div className="max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="1000">
+        {/* Coordonnées de contact - Disposition flex */}
+        <div className="max-w-7xl mx-auto" data-aos="fade-up" data-aos-delay="1000">
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-10 lg:p-14 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100/50">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Vidéo à gauche */}
-              <div className="flex justify-center">
-                <div className="relative w-full overflow-hidden rounded-2xl shadow-lg">
-                  <iframe src="https://player.vimeo.com/video/1125961773?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="100%" height="500" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerPolicy="strict-origin-when-cross-origin" title="v0f300gc0001d2bhkenog65q3jr5o6m0" className="rounded-2xl"></iframe>
-                </div>
-              </div>
-              
-              {/* Coordonnées de contact à droite */}
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-3xl font-semibold mb-2" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif', fontWeight: '600', letterSpacing: '-0.02em'}}>
-                    Nous contacter
-                  </h3>
-                  <p className="text-gray-500 text-sm">Disponibles pour vous accompagner</p>
-                </div>
-                
+            {/* Titre */}
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-semibold mb-2" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif', fontWeight: '600', letterSpacing: '-0.02em'}}>
+                Nous contacter
+              </h3>
+              <p className="text-gray-500 text-sm">Disponibles pour vous accompagner</p>
+            </div>
+            
+            {/* Grid des coordonnées */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Téléphone */}
                 <div className="group">
                   <div className="flex items-center space-x-3 p-4 rounded-xl hover:bg-gray-50 transition-colors">
@@ -652,7 +645,6 @@ export default function ReviewsSection() {
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>

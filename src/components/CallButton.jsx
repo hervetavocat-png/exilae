@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CallButton({ phoneNumber = "01 23 45 67 89", className = "" }) {
+export default function CallButton({ phoneNumber = "07 63 56 01 50", className = "" }) {
   const handleCall = () => {
     window.location.href = `tel:${phoneNumber.replace(/\s/g, '')}`
   }

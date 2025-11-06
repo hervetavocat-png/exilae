@@ -37,7 +37,7 @@ export default function About() {
       speciality: "Droit des étrangers",
       image: jonas,
       shortDesc: "Juriste",
-      fullDescription: "Jonas CERISIER, juriste, accompagne ses clients dans leurs démarches de régularisation et de recours contre les mesures d'éloignement.",
+      fullDescription: "Jonas CERISIER, juriste, accompagne les clients du cabinet dans leurs démarches de régularisation et de recours contre les mesures d'éloignement.",
       experience: "Juriste en formation",
       education: "Master en droit public",
       achievements: [

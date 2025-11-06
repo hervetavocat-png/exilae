@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Empêcher le défilement horizontal sur mobile */
+@media (max-width: 768px) {
+  body, html {
+    overflow-x: hidden;
+  }
+}
+
 /* Animation pour les menus déroulants */
 @keyframes fade-in-down {
   0% {

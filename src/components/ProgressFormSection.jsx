@@ -52,7 +52,7 @@ export default function ProgressFormSection() {
       options: [
         { value: "simple", label: "OQTF sans mesure privative de liberté", description: "30 jours pour contester" },
         { value: "assignation", label: "OQTF avec assignation à résidence", description: "7 jours pour contester" },
-        { value: "retention", label: "OQTF avec rétention", description: "Placement immédiat en centre de rétention" }
+        { value: "retention", label: "OQTF avec placement en Centre de Rétention Administratif « CRA »", description: "48 heures pour contester" }
       ]
     },
     {
@@ -348,8 +348,61 @@ Type d'OQTF: ${formData.oqtfType}${formData.contact.document ? '\nDocument joint
             </p>
           </div>
 
-          {/* Form Options or Contact Form */}
-          {currentStepData.isInput ? (
+          {/* Écran spécial pour les questions générales en droit des étrangers */}
+          {currentStep === 1 && formData.situation === 'pas_oqtf_question' ? (
+            <div className="text-center py-12">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border-2 border-blue-200 mb-8">
+                <div className="mb-6">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-4" style={{backgroundColor: '#12255D'}}>
+                    <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
+                    Pour prendre RDV avec un expert en droit des étrangers du cabinet EXILAE Avocats
+                  </h3>
+                </div>
+                
+                <div className="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                  <p className="text-sm text-gray-600 mb-2">Appelez-nous maintenant</p>
+                  <div className="text-3xl font-bold mb-4" style={{color: '#12255D', fontFamily: 'Poppins, sans-serif'}}>
+                    01 84 74 87 20
+                  </div>
+                  <a 
+                    href="tel:0184748720"
+                    className="inline-flex items-center px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 hover:scale-105 shadow-lg"
+                    style={{backgroundColor: '#12255D'}}
+                    onMouseEnter={(e) => e.target.style.backgroundColor = '#0f1d4d'}
+                    onMouseLeave={(e) => e.target.style.backgroundColor = '#12255D'}
+                  >
+                    <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    Appeler maintenant
+                  </a>
+                </div>
+                
+                <div className="text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span><strong>Horaires :</strong> Lundi - Vendredi, 9h - 18h</span>
+                  </div>
+                </div>
+              </div>
+              
+              <button
+                onClick={() => setFormData(prev => ({ ...prev, situation: '' }))}
+                className="px-6 py-3 rounded-xl font-semibold transition-all duration-300 bg-gray-500 text-white hover:bg-gray-600 hover:scale-105"
+              >
+                ← Retour aux options
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* Form Options or Contact Form */}
+              {currentStepData.isInput ? (
             <div className="mb-8">
               <input
                 type={currentStepData.inputType}
@@ -628,22 +681,25 @@ Type d'OQTF: ${formData.oqtfType}${formData.contact.document ? '\nDocument joint
               </div>
             </div>
           )}
+            </>
+          )}
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between">
-                         <button
-               onClick={prevStep}
-               disabled={currentStep === 1}
-               className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                 currentStep === 1
-                   ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                   : 'bg-gray-500 text-white hover:bg-gray-600 hover:scale-105'
-               }`}
-             >
-               Précédent
-             </button>
+          {!(currentStep === 1 && formData.situation === 'pas_oqtf_question') && (
+            <div className="flex justify-between">
+              <button
+                onClick={prevStep}
+                disabled={currentStep === 1}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                  currentStep === 1
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    : 'bg-gray-500 text-white hover:bg-gray-600 hover:scale-105'
+                }`}
+              >
+                Précédent
+              </button>
 
-             {currentStep < totalSteps ? (
+              {currentStep < totalSteps ? (
                <button
                  onClick={nextStep}
                  disabled={!getCurrentFieldValue()}
@@ -690,7 +746,8 @@ Type d'OQTF: ${formData.oqtfType}${formData.contact.document ? '\nDocument joint
                  {isSubmitting ? 'ENVOI EN COURS...' : 'Obtenir mon évaluation'}
                </button>
              )}
-          </div>
+            </div>
+          )}
         </div>
 
       </div>
@@ -724,7 +781,7 @@ Type d'OQTF: ${formData.oqtfType}${formData.contact.document ? '\nDocument joint
       oqtfType: {
         'simple': '30 jours pour contester',
         'assignation': '7 jours pour contester',
-        'retention': 'Placement immédiat en centre de rétention'
+        'retention': '48 heures pour contester'
       }
     }
     

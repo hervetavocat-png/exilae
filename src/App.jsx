@@ -18,6 +18,7 @@ import Footer from './components/Footer'
 import ContactPopup from './components/ContactPopup'
 import ScrollToTop from './components/ScrollToTop'
 import FloatingButtons from './components/FloatingButtons'
+import CookieBanner from './components/CookieBanner'
 
 // Import pages
 import Home from './pages/Home'
@@ -119,6 +120,7 @@ export default function App() {
       />
       
       <FloatingButtons onOpenPopup={handleOpenPopup} />
+      <CookieBanner />
     </div>
   )
 }

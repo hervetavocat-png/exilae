@@ -6,7 +6,7 @@ export default function TeamSection() {
       name: "Maître Dupont",
       title: "Avocat associé",
       speciality: "Droit des étrangers",
-      experience: "15 ans d'expérience"
+      experience: "10 ans d'expérience"
     },
     {
       name: "Maître Martin",

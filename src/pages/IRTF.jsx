@@ -11,7 +11,7 @@ export default function IRTF() {
       <div className="hidden lg:block bg-white pt-32 pb-8"></div>
       
       {/* Hero Section Bleu - seulement les titres */}
-      <div className="text-white relative overflow-hidden pt-32 lg:pt-16 pb-16" style={{backgroundColor: '#12255D'}}>
+      <div className="hidden md:block text-white relative overflow-hidden pt-32 lg:pt-16 pb-16" style={{backgroundColor: '#12255D'}}>
         <div className="absolute right-0 top-0 w-full h-full pointer-events-none">
           <svg className="absolute right-0 top-0 w-full h-full opacity-15" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMid slice">
             <defs>
@@ -36,8 +36,8 @@ export default function IRTF() {
       </div>
 
       {/* Hero Section - Layout comme l'image */}
-      <div className="py-20 flex items-center justify-center bg-white">
-        <div className="container mx-auto px-1 sm:px-4 pt-20 sm:pt-0">
+      <div className="py-8 md:py-20 flex items-center justify-center bg-white">
+        <div className="container mx-auto px-1 sm:px-4 pt-8 sm:pt-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Contenu à gauche */}
             <div className="pt-8 sm:pt-0 lg:pt-8 px-1 sm:px-0">

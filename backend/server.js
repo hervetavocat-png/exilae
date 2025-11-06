@@ -17,6 +17,7 @@ const blogRoutes = require('./routes/blog');
 
 // Import des middleware
 const { initializeDatabase, logRequests, corsHeaders } = require('./middleware/database');
+const sanitizeMiddleware = require('./middleware/sanitize');
 const MigrationService = require('./services/migration');
 const supabaseStorage = require('./services/supabaseStorage');
 
@@ -49,6 +50,9 @@ app.use((err, req, res, next) => {
   next(err);
 });
 app.use(logRequests);
+
+// Middleware de sanitisation (protection XSS et SQL Injection)
+app.use(sanitizeMiddleware);
 
 // Initialisation de la base de données (une seule fois)
 app.use(initializeDatabase);

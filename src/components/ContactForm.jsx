@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { contactFormService, uploadService } from '../services'
+import { sanitizeFormData } from '../utils/sanitize'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -72,13 +73,21 @@ export default function ContactForm() {
       return
     }
     
+    // Sanitiser les données du formulaire
+    const sanitized = sanitizeFormData(formData)
+    
+    if (!sanitized.isValid) {
+      setErrors(sanitized.errors)
+      return
+    }
+    
     // Mapper les données du formulaire vers le format attendu par l'API
     const apiFormData = {
-      nom: formData.nom,
-      email: formData.email,
-      telephone: formData.telephone,
-      sujet: formData.sujet || 'Contact depuis le site web',
-      message: formData.message,
+      nom: sanitized.data.nom,
+      email: sanitized.data.email,
+      telephone: sanitized.data.telephone,
+      sujet: sanitized.data.sujet || 'Contact depuis le site web',
+      message: sanitized.data.message,
       type_formulaire: 'contact'
     }
     
@@ -450,7 +459,7 @@ export default function ContactForm() {
                   <svg className="w-5 h-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
-                  <span className="text-gray-700">01 23 45 67 89</span>
+                  <span className="text-gray-700">07 63 56 01 50</span>
                 </div>
                 <div className="flex items-center">
                   <svg className="w-5 h-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
