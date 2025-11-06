@@ -94,10 +94,14 @@ function checkSQLInjection(obj) {
  */
 function sanitizeMiddleware(req, res, next) {
   try {
-    // Sanitiser req.body
-    if (req.body && typeof req.body === 'object') {
+    // Ne sanitiser que les requêtes POST, PUT, PATCH (pas GET)
+    const shouldSanitizeBody = ['POST', 'PUT', 'PATCH'].includes(req.method)
+    
+    // Sanitiser req.body seulement pour POST/PUT/PATCH
+    if (shouldSanitizeBody && req.body && typeof req.body === 'object' && Object.keys(req.body).length > 0) {
       // Vérifier SQL Injection avant sanitisation
       if (checkSQLInjection(req.body)) {
+        console.log('⚠️ SQL Injection détecté dans req.body:', req.body)
         return res.status(400).json({
           success: false,
           error: 'Contenu non autorisé détecté dans la requête'
@@ -107,21 +111,22 @@ function sanitizeMiddleware(req, res, next) {
       req.body = sanitizeObject(req.body)
     }
     
-    // Sanitiser req.query
-    if (req.query && typeof req.query === 'object') {
-      if (checkSQLInjection(req.query)) {
-        return res.status(400).json({
-          success: false,
-          error: 'Contenu non autorisé détecté dans les paramètres'
-        })
+    // Sanitiser req.query (légèrement, sans bloquer)
+    if (req.query && typeof req.query === 'object' && Object.keys(req.query).length > 0) {
+      // Ne pas bloquer les requêtes GET avec query params normaux
+      const hasDangerousQuery = checkSQLInjection(req.query)
+      if (hasDangerousQuery) {
+        console.log('⚠️ Contenu suspect dans req.query:', req.query)
+        // Nettoyer mais ne pas bloquer
+        req.query = sanitizeObject(req.query)
       }
-      
-      req.query = sanitizeObject(req.query)
     }
     
-    // Sanitiser req.params
-    if (req.params && typeof req.params === 'object') {
-      if (checkSQLInjection(req.params)) {
+    // Sanitiser req.params (légèrement)
+    if (req.params && typeof req.params === 'object' && Object.keys(req.params).length > 0) {
+      const hasDangerousParams = checkSQLInjection(req.params)
+      if (hasDangerousParams) {
+        console.log('⚠️ SQL Injection détecté dans req.params:', req.params)
         return res.status(400).json({
           success: false,
           error: 'Contenu non autorisé détecté dans l\'URL'
@@ -133,11 +138,10 @@ function sanitizeMiddleware(req, res, next) {
     
     next()
   } catch (error) {
-    console.error('Erreur dans le middleware de sanitisation:', error)
-    res.status(500).json({
-      success: false,
-      error: 'Erreur de traitement de la requête'
-    })
+    console.error('❌ Erreur dans le middleware de sanitisation:', error)
+    console.error('Stack:', error.stack)
+    // Ne pas bloquer la requête en cas d'erreur du middleware
+    next()
   }
 }
 
