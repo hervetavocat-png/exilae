@@ -1,5 +1,6 @@
 const express = require('express');
 const ConsultationRequestModel = require('../models/ConsultationRequest');
+const { envoyerNotificationOQTF } = require('../config/brevo');
 const router = express.Router();
 
 // POST /api/consultations - Créer une nouvelle demande de consultation
@@ -49,6 +50,14 @@ router.post('/', async (req, res) => {
     };
 
     const newConsultation = await ConsultationRequestModel.create(consultationData);
+
+    console.log(`✅ Consultation créée - ${prenom} ${nom}`);
+
+    // Envoyer un email de notification à l'admin
+    const emailResult = await envoyerNotificationOQTF(newConsultation);
+    if (emailResult.success) {
+      console.log(`📧 Email de notification envoyé pour ${prenom} ${nom}`);
+    }
 
     res.status(201).json({
       success: true,

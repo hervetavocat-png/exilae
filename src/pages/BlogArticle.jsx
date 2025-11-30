@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import blogService from '../services/blogService'
+import DOMPurify from 'dompurify'
 
 export default function BlogArticle() {
   const { id } = useParams()
@@ -38,6 +39,86 @@ export default function BlogArticle() {
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
+    })
+  }
+
+  const extractTextFromHtml = (html) => {
+    if (!html) return ''
+    const div = document.createElement('div')
+    div.innerHTML = html
+    return div.textContent || div.innerText || ''
+  }
+
+  const exportContentForSocialMedia = (platform) => {
+    const articleTitle = article?.title || ''
+    const articleContent = extractTextFromHtml(article?.content || '')
+    const articleUrl = window.location.href
+    
+    // Contenu complet pour WhatsApp et autres
+    const fullContent = `📄 ${articleTitle}\n\n${articleContent}\n\n🔗 Lire l'article complet : ${articleUrl}`
+    
+    // Pour Twitter - inclure autant de contenu que possible (limite ~2000 chars dans URL)
+    const twitterMaxLength = 1500 // Limite de sécurité pour l'URL
+    let twitterContent = `${articleTitle}\n\n${articleContent}\n\n🔗 ${articleUrl}`
+    
+    if (twitterContent.length > twitterMaxLength) {
+      const availableSpace = twitterMaxLength - articleUrl.length - 50 // -50 pour "\n\n🔗 " et marge
+      const truncatedContent = articleContent.substring(0, availableSpace)
+      twitterContent = `${articleTitle}\n\n${truncatedContent}...\n\n🔗 ${articleUrl}`
+    }
+    
+    switch(platform) {
+      case 'Twitter':
+        // Twitter - inclure le contenu complet dans le paramètre text
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterContent)}`
+        window.open(twitterUrl, '_blank', 'width=550,height=420')
+        break
+        
+      case 'WhatsApp':
+        // WhatsApp permet de pré-remplir le texte COMPLET
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fullContent)}`
+        window.open(whatsappUrl, '_blank')
+        break
+        
+      case 'Facebook':
+      case 'LinkedIn':
+        // Facebook et LinkedIn ne permettent pas de pré-remplir le texte
+        // On copie dans le presse-papiers et on affiche les instructions
+        navigator.clipboard.writeText(fullContent).then(() => {
+          const socialUrl = platform === 'Facebook' 
+            ? 'https://www.facebook.com/' 
+            : 'https://www.linkedin.com/feed/'
+          
+          // Afficher une popup avec instructions
+          const shouldOpen = window.confirm(
+            `✅ Le contenu COMPLET a été copié dans votre presse-papiers !\n\n` +
+            `📝 Instructions :\n` +
+            `1. Cliquez sur OK pour ouvrir ${platform}\n` +
+            `2. Créez une nouvelle publication\n` +
+            `3. Collez le contenu (Ctrl+V ou Cmd+V)\n` +
+            `4. Publiez !\n\n` +
+            `Voulez-vous ouvrir ${platform} maintenant ?`
+          )
+          
+          if (shouldOpen) {
+            window.open(socialUrl, '_blank')
+          }
+        }).catch(err => {
+          console.error('Erreur lors de la copie:', err)
+          alert('❌ Erreur : Impossible de copier le contenu')
+        })
+        break
+        
+      default:
+        alert('Réseau social non supporté')
+    }
+  }
+
+  const copyLinkToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('✅ Lien copié dans le presse-papiers !')
+    }).catch(err => {
+      console.error('Erreur lors de la copie:', err)
     })
   }
 
@@ -134,12 +215,63 @@ export default function BlogArticle() {
             <div className="prose prose-lg max-w-none">
               {article.content ? (
                 <div 
-                  className="text-gray-800 leading-relaxed whitespace-pre-wrap"
-                  dangerouslySetInnerHTML={{ __html: article.content }}
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.content) }}
                 />
               ) : (
                 <p className="text-gray-600 italic">Contenu non disponible</p>
               )}
+            </div>
+
+            {/* Exporter sur les réseaux sociaux */}
+            <div className="mt-12 pt-8 border-t border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Exporter cet article</h3>
+              <p className="text-sm text-gray-600 mb-4">Le contenu complet sera copié pour que vous puissiez le coller directement</p>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  onClick={() => exportContentForSocialMedia('Facebook')}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#1877F2] text-white rounded-lg hover:bg-[#166FE5] transition-colors"
+                  title="Copier et exporter vers Facebook"
+                >
+                  <i className="bx bxl-facebook text-xl"></i>
+                  <span className="font-medium">Exporter vers Facebook</span>
+                </button>
+                
+                <button
+                  onClick={() => exportContentForSocialMedia('Twitter')}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] text-white rounded-lg hover:bg-[#1A94DA] transition-colors"
+                  title="Copier et exporter vers Twitter/X"
+                >
+                  <i className="bx bxl-twitter text-xl"></i>
+                  <span className="font-medium">Exporter vers Twitter</span>
+                </button>
+                
+                <button
+                  onClick={() => exportContentForSocialMedia('LinkedIn')}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A66C2] text-white rounded-lg hover:bg-[#095196] transition-colors"
+                  title="Copier et exporter vers LinkedIn"
+                >
+                  <i className="bx bxl-linkedin text-xl"></i>
+                  <span className="font-medium">Exporter vers LinkedIn</span>
+                </button>
+                
+                <button
+                  onClick={() => exportContentForSocialMedia('WhatsApp')}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#25D366] text-white rounded-lg hover:bg-[#20BD5A] transition-colors"
+                  title="Copier et exporter vers WhatsApp"
+                >
+                  <i className="bx bxl-whatsapp text-xl"></i>
+                  <span className="font-medium">Exporter vers WhatsApp</span>
+                </button>
+                
+                <button
+                  onClick={copyLinkToClipboard}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
+                  title="Copier uniquement le lien"
+                >
+                  <i className="bx bx-link text-xl"></i>
+                  <span className="font-medium">Copier le lien</span>
+                </button>
+              </div>
             </div>
 
             {/* Footer */}

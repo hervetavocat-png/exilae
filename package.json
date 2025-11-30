@@ -12,9 +12,11 @@
     "indexnow": "node scripts/indexnow-submit.js"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.12",
     "aos": "^2.3.4",
     "boxicons": "^2.1.4",
+    "dompurify": "^3.3.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-helmet-async": "^2.0.5",

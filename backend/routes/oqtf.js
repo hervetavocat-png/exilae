@@ -1,5 +1,6 @@
 const express = require('express');
 const OQTFUrgenceModel = require('../models/OQTFUrgence');
+const { envoyerNotificationOQTF } = require('../config/brevo');
 const router = express.Router();
 
 // POST /api/oqtf - Créer une nouvelle demande OQTF urgente
@@ -43,6 +44,14 @@ router.post('/', async (req, res) => {
     };
 
     const newOQTF = await OQTFUrgenceModel.create(oqtfData);
+
+    console.log(`✅ Consultation OQTF créée - ${prenom} ${nom}`);
+
+    // Envoyer un email de notification à l'admin
+    const emailResult = await envoyerNotificationOQTF(newOQTF);
+    if (emailResult.success) {
+      console.log(`📧 Email de notification envoyé pour ${prenom} ${nom}`);
+    }
 
     res.status(201).json({
       success: true,

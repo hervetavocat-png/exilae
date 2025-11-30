@@ -33,15 +33,15 @@ export default function About() {
     {
       id: 2,
           name: "Jonas CERISIER",
-          title: "Juriste",
+          title: "Avocat",
       speciality: "Droit des étrangers",
       image: jonas,
-      shortDesc: "Juriste",
-      fullDescription: "Jonas CERISIER, juriste, accompagne les clients du cabinet dans leurs démarches de régularisation et de recours contre les mesures d'éloignement.",
-      experience: "Juriste en formation",
+      shortDesc: "Avocat Jonas CERISIER",
+      fullDescription: "Jonas CERISIER, avocat, accompagne les clients du cabinet dans leurs démarches de régularisation et de recours contre les mesures d'éloignement.",
+      experience: "Avocat Jonas CERISIER",
       education: "Master en droit public",
       achievements: [
-        "Juriste",
+        "Avocat Jonas CERISIER",
         "Formation en contentieux administratif",
         "Accompagnement des clients en régularisation",
         "Développement d'expertise en procédures d'urgence"
