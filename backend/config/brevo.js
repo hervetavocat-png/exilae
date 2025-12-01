@@ -1,13 +1,12 @@
-const SibApiV3Sdk = require('@sendinblue/client');
+const brevo = require('@getbrevo/brevo');
 require('dotenv').config();
 
 // Configuration du client Brevo
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-const apiKey = apiInstance.authentications['apiKey'];
-apiKey.apiKey = process.env.BREVO_API_KEY;
+const apiInstance = new brevo.TransactionalEmailsApi();
+apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'stevenkuti20@gmail.com';
-const SENDER_EMAIL = process.env.SENDER_EMAIL || 'urgenceoqtf@gmail.com';
+const SENDER_EMAIL = process.env.SENDER_EMAIL || 'stevenkuti20@gmail.com';
 const SENDER_NAME = process.env.SENDER_NAME || 'Exilae Admin';
 
 // Vérifier la configuration
@@ -41,7 +40,7 @@ const envoyerNotificationOQTF = async (donnees) => {
       priorite
     } = donnees;
 
-    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
 
     sendSmtpEmail.subject = `🚨 Nouvelle demande OQTF - ${prenom} ${nom}`;
     sendSmtpEmail.sender = { name: SENDER_NAME, email: SENDER_EMAIL };
@@ -107,11 +106,17 @@ const envoyerNotificationOQTF = async (donnees) => {
     `;
 
     const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
-    console.log(`📧 Email envoyé avec succès ! Message ID: ${data.messageId}`);
-    return { success: true, messageId: data.messageId };
+    const messageId = data.body?.messageId || data.messageId;
+    console.log(`📧 Email envoyé avec succès ! Message ID: ${messageId}`);
+    return { success: true, messageId };
   } catch (error) {
     console.error('❌ Erreur envoi email Brevo:', error);
-    return { success: false, error: error.message };
+    console.error('❌ Détails de l\'erreur:', JSON.stringify(error, null, 2));
+    if (error.response) {
+      console.error('❌ Response data:', error.response.data);
+      console.error('❌ Response status:', error.response.status);
+    }
+    return { success: false, error: error.message, details: error.response?.data };
   }
 };
 
