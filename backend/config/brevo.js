@@ -22,6 +22,8 @@ if (process.env.BREVO_API_KEY) {
 }
 
 const envoyerNotificationOQTF = async (donnees) => {
+  console.log('🔔 [BREVO] Début envoi email pour:', donnees.nom, donnees.prenom);
+
   if (!process.env.BREVO_API_KEY) {
     console.log('⚠️ Email non envoyé : Brevo non configuré');
     return { success: false, error: 'Brevo non configuré' };
