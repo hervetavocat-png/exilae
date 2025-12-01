@@ -22,7 +22,7 @@ const MigrationService = require('./services/migration');
 const supabaseStorage = require('./services/supabaseStorage');
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 // Configuration de la base de données PostgreSQL (Supabase)
 const pool = new Pool({
