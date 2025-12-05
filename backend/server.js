@@ -29,6 +29,25 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_POOLER_URL || process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
+  },
+  max: 20, // Nombre maximum de connexions dans le pool
+  idleTimeoutMillis: 30000, // Fermer les connexions inactives après 30 secondes
+  connectionTimeoutMillis: 10000, // Timeout de connexion à 10 secondes
+  keepAlive: true, // Garder les connexions actives
+  keepAliveInitialDelayMillis: 10000 // Délai initial pour keepAlive
+});
+
+// Gérer les erreurs de pool
+pool.on('error', (err, client) => {
+  console.error('❌ Erreur inattendue sur le client PostgreSQL inactif', err);
+});
+
+// Tester la connexion au démarrage
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('❌ Erreur connexion initiale PostgreSQL:', err);
+  } else {
+    console.log('✅ Connexion PostgreSQL établie:', res.rows[0].now);
   }
 });
 
