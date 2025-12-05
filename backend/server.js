@@ -193,6 +193,9 @@ app.get('/api/uploads/info', async (req, res) => {
 // Servir les fichiers uploadés statiquement
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Servir les fichiers statiques du build React (production)
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
@@ -237,12 +240,32 @@ app.get('/api/test', (req, res) => {
   });
 });
 
+// Route catch-all pour React Router (SPA)
+// Middleware qui sert index.html pour toutes les routes non-API et non-fichiers
+app.use((req, res, next) => {
+  // Ignorer les routes API
+  if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+    return next();
+  }
+  // Ignorer TOUS les fichiers avec extension (même dans des sous-dossiers)
+  // Cela inclut /blog/assets/index.css, /assets/logo.png, etc.
+  if (/\.[a-zA-Z0-9]+$/.test(req.path)) {
+    return next();
+  }
+  // Servir index.html pour toutes les autres routes (SPA)
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'), (err) => {
+    if (err) {
+      next(err);
+    }
+  });
+});
+
 // Middleware de gestion des erreurs
 app.use((err, req, res, next) => {
   console.error('❌ Erreur serveur:', err.stack);
-  res.status(500).json({ 
+  res.status(500).json({
     error: 'Une erreur interne du serveur s\'est produite',
-    message: err.message 
+    message: err.message
   });
 });
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import blogService from '../services/blogService'
 import DOMPurify from 'dompurify'
+import SEO from '../components/SEO'
 
 export default function BlogArticle() {
   const { id } = useParams()
@@ -42,73 +43,38 @@ export default function BlogArticle() {
     })
   }
 
-  const extractTextFromHtml = (html) => {
-    if (!html) return ''
-    const div = document.createElement('div')
-    div.innerHTML = html
-    return div.textContent || div.innerText || ''
-  }
 
-  const exportContentForSocialMedia = (platform) => {
-    const articleTitle = article?.title || ''
-    const articleContent = extractTextFromHtml(article?.content || '')
+  const shareToSocialMedia = (platform) => {
     const articleUrl = window.location.href
-    
-    // Contenu complet pour WhatsApp et autres
-    const fullContent = `📄 ${articleTitle}\n\n${articleContent}\n\n🔗 Lire l'article complet : ${articleUrl}`
-    
-    // Pour Twitter - inclure autant de contenu que possible (limite ~2000 chars dans URL)
-    const twitterMaxLength = 1500 // Limite de sécurité pour l'URL
-    let twitterContent = `${articleTitle}\n\n${articleContent}\n\n🔗 ${articleUrl}`
-    
-    if (twitterContent.length > twitterMaxLength) {
-      const availableSpace = twitterMaxLength - articleUrl.length - 50 // -50 pour "\n\n🔗 " et marge
-      const truncatedContent = articleContent.substring(0, availableSpace)
-      twitterContent = `${articleTitle}\n\n${truncatedContent}...\n\n🔗 ${articleUrl}`
-    }
-    
+    const articleTitle = article?.title || 'Article - URGENCE OQTF'
+
+    let shareUrl = ''
+
     switch(platform) {
-      case 'Twitter':
-        // Twitter - inclure le contenu complet dans le paramètre text
-        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterContent)}`
-        window.open(twitterUrl, '_blank', 'width=550,height=420')
-        break
-        
-      case 'WhatsApp':
-        // WhatsApp permet de pré-remplir le texte COMPLET
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fullContent)}`
-        window.open(whatsappUrl, '_blank')
-        break
-        
       case 'Facebook':
-      case 'LinkedIn':
-        // Facebook et LinkedIn ne permettent pas de pré-remplir le texte
-        // On copie dans le presse-papiers et on affiche les instructions
-        navigator.clipboard.writeText(fullContent).then(() => {
-          const socialUrl = platform === 'Facebook' 
-            ? 'https://www.facebook.com/' 
-            : 'https://www.linkedin.com/feed/'
-          
-          // Afficher une popup avec instructions
-          const shouldOpen = window.confirm(
-            `✅ Le contenu COMPLET a été copié dans votre presse-papiers !\n\n` +
-            `📝 Instructions :\n` +
-            `1. Cliquez sur OK pour ouvrir ${platform}\n` +
-            `2. Créez une nouvelle publication\n` +
-            `3. Collez le contenu (Ctrl+V ou Cmd+V)\n` +
-            `4. Publiez !\n\n` +
-            `Voulez-vous ouvrir ${platform} maintenant ?`
-          )
-          
-          if (shouldOpen) {
-            window.open(socialUrl, '_blank')
-          }
-        }).catch(err => {
-          console.error('Erreur lors de la copie:', err)
-          alert('❌ Erreur : Impossible de copier le contenu')
-        })
+        // Facebook partage avec aperçu Open Graph automatique
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`
+        window.open(shareUrl, '_blank', 'width=600,height=400')
         break
-        
+
+      case 'Twitter':
+        // Twitter/X partage avec aperçu Open Graph
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(articleTitle)}`
+        window.open(shareUrl, '_blank', 'width=550,height=420')
+        break
+
+      case 'LinkedIn':
+        // LinkedIn partage avec aperçu Open Graph
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`
+        window.open(shareUrl, '_blank', 'width=600,height=600')
+        break
+
+      case 'WhatsApp':
+        // WhatsApp partage avec aperçu automatique du lien
+        shareUrl = `https://wa.me/?text=${encodeURIComponent(articleTitle + ' - ' + articleUrl)}`
+        window.open(shareUrl, '_blank')
+        break
+
       default:
         alert('Réseau social non supporté')
     }
@@ -153,8 +119,29 @@ export default function BlogArticle() {
     )
   }
 
+  // Préparer les données Open Graph
+  const articleUrl = typeof window !== 'undefined' ? window.location.href : `https://urgence-oqtf.fr/blog/${id}`
+  const articleImage = article?.image_url || 'https://urgence-oqtf.fr/og-image.jpg'
+  const articleDescription = article?.excerpt || 'Découvrez nos conseils et actualités sur le droit des étrangers et les recours OQTF.'
+
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <>
+      {/* Meta tags SEO et Open Graph */}
+      <SEO
+        title={`${article.title} | Blog URGENCE OQTF`}
+        description={articleDescription}
+        image={articleImage}
+        url={articleUrl}
+        type="article"
+        article={{
+          publishedTime: article.published_date || article.created_at,
+          modifiedTime: article.updated_at,
+          author: 'URGENCE OQTF',
+          section: 'Droit des étrangers'
+        }}
+      />
+
+      <div className="min-h-screen bg-gray-50 pt-20">
       {/* Bouton retour */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <button
@@ -214,59 +201,64 @@ export default function BlogArticle() {
             {/* Contenu principal */}
             <div className="prose prose-lg max-w-none">
               {article.content ? (
-                <div 
-                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(article.content) }}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(article.content, {
+                      ADD_TAGS: ['iframe'],
+                      ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
+                    })
+                  }}
                 />
               ) : (
                 <p className="text-gray-600 italic">Contenu non disponible</p>
               )}
             </div>
 
-            {/* Exporter sur les réseaux sociaux */}
+            {/* Partager sur les réseaux sociaux */}
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Exporter cet article</h3>
-              <p className="text-sm text-gray-600 mb-4">Le contenu complet sera copié pour que vous puissiez le coller directement</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Partager cet article</h3>
+              <p className="text-sm text-gray-600 mb-4">Partagez le lien de cet article sur vos réseaux sociaux</p>
               <div className="flex flex-wrap gap-3">
                 <button
-                  onClick={() => exportContentForSocialMedia('Facebook')}
+                  onClick={() => shareToSocialMedia('Facebook')}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#1877F2] text-white rounded-lg hover:bg-[#166FE5] transition-colors"
-                  title="Copier et exporter vers Facebook"
+                  title="Partager sur Facebook"
                 >
                   <i className="bx bxl-facebook text-xl"></i>
-                  <span className="font-medium">Exporter vers Facebook</span>
+                  <span className="font-medium">Facebook</span>
                 </button>
-                
+
                 <button
-                  onClick={() => exportContentForSocialMedia('Twitter')}
+                  onClick={() => shareToSocialMedia('Twitter')}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] text-white rounded-lg hover:bg-[#1A94DA] transition-colors"
-                  title="Copier et exporter vers Twitter/X"
+                  title="Partager sur Twitter/X"
                 >
                   <i className="bx bxl-twitter text-xl"></i>
-                  <span className="font-medium">Exporter vers Twitter</span>
+                  <span className="font-medium">Twitter</span>
                 </button>
-                
+
                 <button
-                  onClick={() => exportContentForSocialMedia('LinkedIn')}
+                  onClick={() => shareToSocialMedia('LinkedIn')}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A66C2] text-white rounded-lg hover:bg-[#095196] transition-colors"
-                  title="Copier et exporter vers LinkedIn"
+                  title="Partager sur LinkedIn"
                 >
                   <i className="bx bxl-linkedin text-xl"></i>
-                  <span className="font-medium">Exporter vers LinkedIn</span>
+                  <span className="font-medium">LinkedIn</span>
                 </button>
-                
+
                 <button
-                  onClick={() => exportContentForSocialMedia('WhatsApp')}
+                  onClick={() => shareToSocialMedia('WhatsApp')}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#25D366] text-white rounded-lg hover:bg-[#20BD5A] transition-colors"
-                  title="Copier et exporter vers WhatsApp"
+                  title="Partager sur WhatsApp"
                 >
                   <i className="bx bxl-whatsapp text-xl"></i>
-                  <span className="font-medium">Exporter vers WhatsApp</span>
+                  <span className="font-medium">WhatsApp</span>
                 </button>
-                
+
                 <button
                   onClick={copyLinkToClipboard}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
-                  title="Copier uniquement le lien"
+                  title="Copier le lien"
                 >
                   <i className="bx bx-link text-xl"></i>
                   <span className="font-medium">Copier le lien</span>
@@ -297,7 +289,8 @@ export default function BlogArticle() {
           </div>
         </div>
       </article>
-    </div>
+      </div>
+    </>
   )
 }
 
